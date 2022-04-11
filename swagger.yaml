@@ -1,0 +1,45 @@
+swagger: '2.0'
+info:
+  version: 0.0.2
+  title: Perceptor Decisions API
+basePath: /api
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /health:
+    get:
+      summary: Get the health status
+      tags:
+        - Health
+      operationId: getHealth
+      consumes:
+        - application/json
+      responses:
+        '204':
+          description: Success.
+        '400':
+          description: Validation error.
+          schema:
+            $ref: '#/definitions/Error'
+definitions:
+  Error:
+    type: object
+    required:
+      - data
+    properties:
+      data:
+        type: object
+        required:
+          - code
+          - correlationId
+        properties:
+          code:
+            type: integer
+            format: int32
+            x-nullable: false
+          message:
+            type: string

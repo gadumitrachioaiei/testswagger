@@ -1,0 +1,23 @@
+To generate the client:
+
+1. Install the swagger tool: https://github.com/go-swagger/go-swagger/releases/tag/v0.29.0
+
+2. Run the command:
+   swagger generate client -f swagger.yaml
+
+To understand how to read swagger response
+
+1. Run the server, maybe change it:
+   go run server/main.go
+
+2. Run the client, maybe change it:
+   go run main.go
+
+My conclusions:
+
+1. If we don't have a default clause in the spec, and we return an undefined status code, we get back a "github.com/go-openapi/runtime".\*APIError, that has a property called Code.
+
+2. If we do have a default clause, then it will capture everything that wasn't defined, and we have a Code() method we can use to find the status code.
+
+3. If the patch is not accesible through the server, you get back an error that cannot be serialized:
+   &{<nil>} (\*models.Error) is not supported by the TextConsumer, can be resolved by supporting TextUnmarshaler interface
