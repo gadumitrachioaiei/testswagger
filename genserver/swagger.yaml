@@ -68,8 +68,3 @@ definitions:
             type: string
       data:
        type: object
-       x-go-type:
-         import:
-           alias: "mymodels"
-           package: "github.com/gadumitrachioaiei/testswagger/mymodels"
-         type: "RawMessage"

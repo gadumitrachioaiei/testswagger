@@ -7,12 +7,9 @@ package health
 
 import (
 	"fmt"
-	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
-
-	"github.com/gadumitrachioaiei/testswagger/models"
 )
 
 // GetHealthReader is a Reader for the GetHealth structure.
@@ -71,24 +68,13 @@ func NewGetHealthBadRequest() *GetHealthBadRequest {
 Validation error.
 */
 type GetHealthBadRequest struct {
-	Payload *models.Error
 }
 
 func (o *GetHealthBadRequest) Error() string {
-	return fmt.Sprintf("[GET /health][%d] getHealthBadRequest  %+v", 400, o.Payload)
-}
-func (o *GetHealthBadRequest) GetPayload() *models.Error {
-	return o.Payload
+	return fmt.Sprintf("[GET /health][%d] getHealthBadRequest ", 400)
 }
 
 func (o *GetHealthBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	o.Payload = new(models.Error)
-
-	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
 
 	return nil
 }

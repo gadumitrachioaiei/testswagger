@@ -11,6 +11,7 @@ import (
 	"github.com/go-openapi/strfmt"
 
 	"github.com/gadumitrachioaiei/testswagger/client/health"
+	"github.com/gadumitrachioaiei/testswagger/client/test"
 )
 
 // Default perceptor decisions API HTTP client.
@@ -56,6 +57,7 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *PerceptorD
 	cli := new(PerceptorDecisionsAPI)
 	cli.Transport = transport
 	cli.Health = health.New(transport, formats)
+	cli.Test = test.New(transport, formats)
 	return cli
 }
 
@@ -102,6 +104,8 @@ func (cfg *TransportConfig) WithSchemes(schemes []string) *TransportConfig {
 type PerceptorDecisionsAPI struct {
 	Health health.ClientService
 
+	Test test.ClientService
+
 	Transport runtime.ClientTransport
 }
 
@@ -109,4 +113,5 @@ type PerceptorDecisionsAPI struct {
 func (c *PerceptorDecisionsAPI) SetTransport(transport runtime.ClientTransport) {
 	c.Transport = transport
 	c.Health.SetTransport(transport)
+	c.Test.SetTransport(transport)
 }
